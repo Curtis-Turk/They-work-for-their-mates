@@ -1,14 +1,9 @@
 import "./App.css";
-import { useEffect } from "react";
+import Dropdown from "./dropdown.js";
+import { useState, useEffect } from "react";
 
 function App() {
-  // const [mpData, setMpData] = useState([]);
-  // setMpData(parseXml());
-  // const mpDataElements = () => {
-  //   mpData?.map((mp) => {
-  //     return <div>{mp}</div>;
-  //   });
-  // };
+  const [mpData, setMpData] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5002/xml", {
@@ -16,12 +11,48 @@ function App() {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setMpData(data.data));
   }, []);
+
+  const mpDataElements = mpData?.map((mp) => {
+    // return " ";
+    return (
+      <div key={mp.$.membername}>
+        {mp.$.membername}
+        {mp.category[0]}
+      </div>
+    );
+  });
+
+  const options = [
+    { value: "green", label: "Green" },
+    { value: "blue", label: "Blue" },
+    { value: "red", label: "Red" },
+    { value: "yellow", label: "Yellow" },
+    { value: "orange", label: "Orange" },
+    { value: "pink", label: "Pink" },
+    { value: "purple", label: "Purple" },
+    { value: "grey", label: "Grey" },
+  ];
 
   return (
     <div className="App">
-      <div>app</div>
+      <Dropdown
+        isSearchable
+        isMulti
+        placeHolder="Select..."
+        options={options}
+        onChange={(value) => console.log(value)}
+      />
+      {mpData.length ? mpDataElements : null}
+
+      <Dropdown
+        isSearchable
+        isMulti
+        placeHolder="Select..."
+        options={options}
+        onChange={(value) => console.log(value)}
+      />
     </div>
   );
 }
