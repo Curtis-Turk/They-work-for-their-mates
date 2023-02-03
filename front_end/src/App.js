@@ -1,7 +1,5 @@
-import logo from "./logo.svg";
 import "./App.css";
-import parseXml from "./utils/xmlParser";
-import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
   // const [mpData, setMpData] = useState([]);
@@ -11,24 +9,21 @@ function App() {
   //     return <div>{mp}</div>;
   //   });
   // };
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         {mpDataElements()}
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
+
+  useEffect(() => {
+    fetch("http://localhost:5002/xml", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
+  return (
+    <div className="App">
+      <div>app</div>
+    </div>
+  );
 }
 
 export default App;
