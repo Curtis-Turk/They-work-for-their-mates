@@ -16,8 +16,7 @@ app.get("/", (req, res) => {
 
 app.get("/xml", async (req, res) => {
   let mpData = await parseXml();
-  console.log(mpData);
-  res.json({ data: mpData, hello: "hi" });
+  res.json({ data: mpData });
 });
 
 const port = process.env.PORT || 5002;

@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+// https://medium.com/tinyso/how-to-create-a-dropdown-select-component-in-react-bf85df53e206
 
-import "./dropdown.css";
+import React, { useEffect, useRef, useState } from "react";
+import "../dropdown.css";
 
 const Icon = () => {
   return (
@@ -162,5 +163,8 @@ const Dropdown = ({
     </div>
   );
 };
+
+// investment vanking
+// private healthcare
 
 export default Dropdown;
