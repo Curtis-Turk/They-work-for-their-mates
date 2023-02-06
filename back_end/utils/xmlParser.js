@@ -1,5 +1,4 @@
 import { get } from "https";
-import { resolve } from "path";
 import { Parser } from "xml2js";
 var parser = new Parser();
 

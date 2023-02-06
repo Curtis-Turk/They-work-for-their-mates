@@ -12,7 +12,7 @@ function MpCard({ mpObj }) {
         let name = contrib.$.name;
         let description = contrib.record[0].item[0]._;
         return (
-          <div key={name}>
+          <div key={name} className="registered interest">
             <div>Name: {name}</div>
             <div>Description: {description}</div>
           </div>

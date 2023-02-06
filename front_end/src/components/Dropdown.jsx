@@ -152,7 +152,7 @@ const Dropdown = ({
           {getOptions().map((option) => (
             <div
               onClick={() => onItemClick(option)}
-              key={option.value}
+              key={option.name}
               className={`dropdown-item ${isSelected(option) && "selected"}`}
             >
               {option.label}

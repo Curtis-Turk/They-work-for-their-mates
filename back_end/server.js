@@ -3,6 +3,7 @@ import cors from "cors";
 import pkg from "body-parser";
 
 import parseXml from "./utils/xmlParser.js";
+import readCSVFile from "./utils/mpData.js";
 
 const { json } = pkg;
 const app = express();
@@ -16,6 +17,11 @@ app.get("/", (req, res) => {
 
 app.get("/xml", async (req, res) => {
   let mpData = await parseXml();
+  res.json({ data: mpData });
+});
+
+app.get("/mpdata", (req, res) => {
+  let mpData = readCSVFile("./data/mps.csv");
   res.json({ data: mpData });
 });
 
