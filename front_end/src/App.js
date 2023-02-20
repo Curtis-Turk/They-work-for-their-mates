@@ -9,6 +9,7 @@ function App() {
   const [mpContribs, setMpContribs] = useState([]);
   const [selectMps, setSelectMps] = useState([]);
 
+  // XLM fetch for mp contributions
   useEffect(() => {
     fetch("http://localhost:5002/xml", {
       method: "GET",
@@ -18,6 +19,7 @@ function App() {
       .then((data) => setMpContribs(data.data));
   }, []);
 
+  // fetch for Mp party affiliation
   useEffect(() => {
     const setMpPartyDataFn = async () => {
       let data = await getMpPartyData();

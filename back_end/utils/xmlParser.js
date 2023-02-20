@@ -16,14 +16,10 @@ const parseXml = async () => {
           res.on("data", function (data_) {
             data += data_.toString();
           });
+
           res.on("end", function () {
             parser.parseString(data, (err, result) => {
-              let mpData = [];
-
-              result.publicwhip.regmem.forEach((mp) => {
-                mpData.push(mp);
-              });
-              resolve(mpData);
+              resolve(result.publicwhip.regmem);
             });
           });
         }
