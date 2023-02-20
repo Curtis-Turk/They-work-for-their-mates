@@ -4,6 +4,7 @@ import pkg from "body-parser";
 
 import parseXml from "./utils/xmlParser.js";
 import readCSVFile from "./utils/mpData.js";
+import { combineMpData } from "./utils/combineMpData.js";
 
 const { json } = pkg;
 const app = express();
@@ -18,14 +19,16 @@ app.get("/", (req, res) => {
 // This endpoint returns an object that includes an array of objects with MP data as its single value.
 app.get("/xml", async (req, res) => {
   // mpData is an array of objects containing MP data parsed from the fetched TheyWorkForYou scraped XML
-  let mpData = await parseXml();
+  const mpData = await parseXml();
 
   // mpPartyData is an array of objects containing MP party affiliation information
-  let mpPartyData = readCSVFile("./data/mps.csv");
+  const mpPartyData = readCSVFile("./data/mps.csv");
 
   // Function that combines the mpData objects with the party affiliation into the mpData array
+  // console.log(mpData[0], mpPartyData[0]);
 
-  res.json({ data: mpData });
+  const combinedMpData = combineMpData(mpData, mpPartyData);
+  res.json({ data: combinedMpData });
 });
 
 app.get("/mpdata", (req, res) => {
