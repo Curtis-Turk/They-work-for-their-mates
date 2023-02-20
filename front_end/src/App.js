@@ -2,10 +2,8 @@ import "./App.css";
 import Dropdown from "./components/Dropdown";
 import { useState, useEffect } from "react";
 import MpCard from "./components/MpCard";
-import getMpPartyData from "./api/getMpPartyData";
 
 function App() {
-  const [mpPartyData, setMpPartyData] = useState([]);
   const [mpContribs, setMpContribs] = useState([]);
   const [selectMps, setSelectMps] = useState([]);
 
@@ -17,15 +15,6 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => setMpContribs(data.data));
-  }, []);
-
-  // fetch for Mp party affiliation
-  useEffect(() => {
-    const setMpPartyDataFn = async () => {
-      let data = await getMpPartyData();
-      setMpPartyData(data.data);
-    };
-    setMpPartyDataFn();
   }, []);
 
   const mpContribsEls = mpContribs?.map((mp) => {
