@@ -2,10 +2,10 @@ import "./App.css";
 import Dropdown from "./components/Dropdown";
 import { useState, useEffect } from "react";
 import MpCard from "./components/MpCard";
-import getMpData from "./api/getMpData";
+import getMpPartyData from "./api/getMpPartyData";
 
 function App() {
-  const [mpData, setMpData] = useState([]);
+  const [mpPartyData, setMpPartyData] = useState([]);
   const [mpContribs, setMpContribs] = useState([]);
   const [selectMps, setSelectMps] = useState([]);
 
@@ -16,11 +16,14 @@ function App() {
     })
       .then((res) => res.json())
       .then((data) => setMpContribs(data.data));
-    const setMpDataFn = async () => {
-      let data = await getMpData();
-      setMpData(data.data);
+  }, []);
+
+  useEffect(() => {
+    const setMpPartyDataFn = async () => {
+      let data = await getMpPartyData();
+      setMpPartyData(data.data);
     };
-    setMpDataFn();
+    setMpPartyDataFn();
   }, []);
 
   const mpContribsEls = mpContribs?.map((mp) => {
@@ -34,7 +37,6 @@ function App() {
   });
 
   const options = mpContribs?.map((mp) => {
-    // console.log(mp.$.membername);
     return { name: mp.$.membername, label: mp.$.membername };
   });
 

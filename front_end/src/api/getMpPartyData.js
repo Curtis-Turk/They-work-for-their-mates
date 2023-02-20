@@ -1,4 +1,4 @@
-const getMpData = async () => {
+const getMpPartyData = async () => {
   const res = await fetch("http://localhost:5002/mpdata", {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -6,4 +6,4 @@ const getMpData = async () => {
   const data = await res.json();
   return data;
 };
-export default getMpData;
+export default getMpPartyData;
